@@ -19,9 +19,9 @@ export class FileUploaderComponent {
     const formData = new FormData();
 
     for (let file of files)
-      formData.append(file.name, file);
+      formData.append('file', file, file.name);
 
-    const uploadReq = new HttpRequest('POST', `http://localhost:56141/api/uploadFile`, formData, {
+    const uploadReq = new HttpRequest('POST', `http://localhost:56141/api/FileUpload`, formData, {
       reportProgress: true,
     });
 
