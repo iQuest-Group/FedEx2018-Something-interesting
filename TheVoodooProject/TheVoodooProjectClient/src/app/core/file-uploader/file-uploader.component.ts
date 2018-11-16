@@ -18,18 +18,16 @@ export class FileUploaderComponent {
 
     const formData = new FormData();
 
-    for (let file of files)
-      formData.append('file', file, file.name);
+    let file = files[0];
+    formData.append('file', file, file.name);
 
     const uploadReq = new HttpRequest('POST', `http://localhost:56141/api/FileUpload`, formData, {
       reportProgress: true,
     });
 
     this.http.request(uploadReq).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress)
-        this.progress = Math.round(100 * event.loaded / event.total);
-      else if (event.type === HttpEventType.Response)
-        this.message = event.body.toString();
+      if (event.type === HttpEventType.Response)
+        this.message = file.Name + " uploaded succesfully.";
     });
   }
 }

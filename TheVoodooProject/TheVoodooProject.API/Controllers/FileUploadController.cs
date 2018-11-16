@@ -81,19 +81,14 @@ namespace TheVoodooProject.API.Controllers
                         }
                         else if (e.Result.Reason == ResultReason.NoMatch)
                         {
-//                            text = "NOMATCH: Speech could not be recognized.";
                         }
                     };
 
                     recognizer.Canceled += (s, e) =>
                     {
-//                        text = "CANCELED: Reason={e.Reason}";
 
                         if (e.Reason == CancellationReason.Error)
                         {
-//                            text = $"CANCELED: ErrorCode={e.ErrorCode}";
-//                            text += $"CANCELED: ErrorDetails={e.ErrorDetails}";
-//                            text += $"CANCELED: Did you update the subscription info?";
                         }
 
                         stopRecognition.TrySetResult(0);
@@ -101,13 +96,10 @@ namespace TheVoodooProject.API.Controllers
 
                     recognizer.SessionStarted += (s, e) =>
                     {
-//                        text = "\n    Session started event.";
                     };
 
                     recognizer.SessionStopped += (s, e) =>
                     {
-//                        text = "\n    Session stopped event.";
-//                        text += "\nStop recognition.";
                         stopRecognition.TrySetResult(0);
                     };
 
@@ -131,7 +123,7 @@ namespace TheVoodooProject.API.Controllers
 
             var result = client.SentimentAsync(
                     new MultiLanguageBatchInput(
-                        new List<MultiLanguageInput>()
+                        new List<MultiLanguageInput>
                         {
                           new MultiLanguageInput("en", "0", text)
                         })).Result;
