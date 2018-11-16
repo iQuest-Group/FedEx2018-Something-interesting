@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28306.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheVoodooProject.API", "TheVoodooProject.API\TheVoodooProject.API.csproj", "{C8DF39B5-F6A6-4F35-BC41-27828F28525B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheVoodooProject.API", "TheVoodooProject.API\TheVoodooProject.API.csproj", "{C8DF39B5-F6A6-4F35-BC41-27828F28525B}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "AzureResourceGroup", "AzureResourceGroup\AzureResourceGroup.deployproj", "{174B62E1-EB83-402B-9A32-83F4DBD239F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C8DF39B5-F6A6-4F35-BC41-27828F28525B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8DF39B5-F6A6-4F35-BC41-27828F28525B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8DF39B5-F6A6-4F35-BC41-27828F28525B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{174B62E1-EB83-402B-9A32-83F4DBD239F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{174B62E1-EB83-402B-9A32-83F4DBD239F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{174B62E1-EB83-402B-9A32-83F4DBD239F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{174B62E1-EB83-402B-9A32-83F4DBD239F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
