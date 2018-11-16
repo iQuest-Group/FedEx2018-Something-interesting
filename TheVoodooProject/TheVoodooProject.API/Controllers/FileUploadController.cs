@@ -24,7 +24,7 @@ namespace TheVoodooProject.API.Controllers
             {
                 var file = Request.Form.Files[0];
                 const string folderName = "Upload";
-                var webRootPath = hostingEnvironment.WebRootPath;
+                var webRootPath = hostingEnvironment.ContentRootPath;
                 var newPath = Path.Combine(webRootPath, folderName);
                 if (!Directory.Exists(newPath))
                 {
@@ -33,10 +33,7 @@ namespace TheVoodooProject.API.Controllers
 
                 if (file.Length <= 0) return Json("Upload Successful.");
 
-                var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition)
-                    .FileName.ToString()
-                    .Trim('"');
-                var fullPath = Path.Combine(newPath, fileName);
+                var fullPath = Path.Combine(newPath, file.FileName.ToString());
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);

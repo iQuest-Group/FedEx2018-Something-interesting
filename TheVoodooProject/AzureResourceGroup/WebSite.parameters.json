@@ -10,18 +10,6 @@
     },
     "TheVoodooWebAppPackageFileName": {
       "value": "package.zip"
-    },
-    //"CognitiveServicesName": {
-    //  "value": "CognitiveServices"
-    //},
-    //"CognitiveServicesLocation": {
-    //  "value": "eastus"
-    //},
-    //"CognitiveServicesApiType": {
-    //  "value": "TextAnalytics"
-    //},
-    //"CognitiveServicesSku": {
-    //  "value": "F0"
-    //}
+    }
   }
 }
