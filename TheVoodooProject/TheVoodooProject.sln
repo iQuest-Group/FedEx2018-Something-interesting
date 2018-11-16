@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28306.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheVoodooProject.API", "TheVoodooProject.API\TheVoodooProject.API.csproj", "{C8DF39B5-F6A6-4F35-BC41-27828F28525B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8DF39B5-F6A6-4F35-BC41-27828F28525B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8DF39B5-F6A6-4F35-BC41-27828F28525B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8DF39B5-F6A6-4F35-BC41-27828F28525B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8DF39B5-F6A6-4F35-BC41-27828F28525B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2665E99B-D00F-4564-BFAF-1355C4077317}
+	EndGlobalSection
+EndGlobal
