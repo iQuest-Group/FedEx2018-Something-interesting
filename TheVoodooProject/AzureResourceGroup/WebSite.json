@@ -55,18 +55,18 @@
         "description": "Name of the webdeploy package"
       }
     },
-    "CognitiveServicesName": {
-      "type": "string"
-    },
-    "CognitiveServicesLocation": {
-      "type": "string"
-    },
-    "CognitiveServicesApiType": {
-      "type": "string"
-    },
-    "CognitiveServicesSku": {
-      "type": "string"
-    }
+    //"CognitiveServicesName": {
+    //  "type": "string"
+    //},
+    //"CognitiveServicesLocation": {
+    //  "type": "string"
+    //},
+    //"CognitiveServicesApiType": {
+    //  "type": "string"
+    //},
+    //"CognitiveServicesSku": {
+    //  "type": "string"
+    //}
   },
   "variables": {
     "webSiteName": "[concat('webSite', uniqueString(resourceGroup().id))]"
@@ -277,16 +277,16 @@
         "applicationId": "[variables('webSiteName')]"
       }
     },
-    {
-      "apiVersion": "2017-04-18",
-      "name": "[parameters('CognitiveServicesName')]",
-      "location": "[parameters('CognitiveServicesLocation')]",
-      "type": "Microsoft.CognitiveServices/accounts",
-      "kind": "[parameters('CognitiveServicesApiType')]",
-      "sku": {
-        "name": "[parameters('CognitiveServicesSku')]"
-      },
-      "properties": {}
-    }
+    //{
+    //  "apiVersion": "2017-04-18",
+    //  "name": "[parameters('CognitiveServicesName')]",
+    //  "location": "[parameters('CognitiveServicesLocation')]",
+    //  "type": "Microsoft.CognitiveServices/accounts",
+    //  "kind": "[parameters('CognitiveServicesApiType')]",
+    //  "sku": {
+    //    "name": "[parameters('CognitiveServicesSku')]"
+    //  },
+    //  "properties": {}
+    //}
   ]
 }
