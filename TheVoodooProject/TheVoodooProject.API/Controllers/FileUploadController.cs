@@ -6,6 +6,8 @@ using System.IO;
 
 namespace TheVoodooProject.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class FileUploadController : Controller
     {
         private readonly IHostingEnvironment hostingEnvironment;
@@ -21,21 +23,23 @@ namespace TheVoodooProject.API.Controllers
             try
             {
                 var file = Request.Form.Files[0];
-                var folderName = "Upload";
+                const string folderName = "Upload";
                 var webRootPath = hostingEnvironment.WebRootPath;
                 var newPath = Path.Combine(webRootPath, folderName);
                 if (!Directory.Exists(newPath))
                 {
                     Directory.CreateDirectory(newPath);
                 }
-                if (file.Length > 0)
+
+                if (file.Length <= 0) return Json("Upload Successful.");
+
+                var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition)
+                    .FileName.ToString()
+                    .Trim('"');
+                var fullPath = Path.Combine(newPath, fileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
-                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.ToString().Trim('"');
-                    var fullPath = Path.Combine(newPath, fileName);
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
+                    file.CopyTo(stream);
                 }
                 return Json("Upload Successful.");
             }
