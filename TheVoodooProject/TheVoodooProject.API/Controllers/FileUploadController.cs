@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Net.Http.Headers;
-using System;
+﻿using System;
 using System.IO;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CognitiveServices.Speech;
+using Microsoft.CognitiveServices.Speech.Audio;
 
 namespace TheVoodooProject.API.Controllers
 {
@@ -18,7 +20,7 @@ namespace TheVoodooProject.API.Controllers
         }
 
         [HttpPost, DisableRequestSizeLimit]
-        public ActionResult UploadFile()
+        public async Task<ActionResult> UploadFile()
         {
             try
             {
@@ -31,18 +33,101 @@ namespace TheVoodooProject.API.Controllers
                     Directory.CreateDirectory(newPath);
                 }
 
-                if (file.Length <= 0) return Json("Upload Successful.");
+                if (file.Length <= 0)
+                {
+                    return Json("Upload Successful.");
+                }
 
                 var fullPath = Path.Combine(newPath, file.FileName.ToString());
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }
-                return Json("Upload Successful.");
+
+                string text = await SpeechToText(fullPath);
+
+                return Json(new { text });
             }
             catch (Exception ex)
             {
-                return Json("Upload Failed: " + ex.Message);
+                return Json("Failed: " + ex.Message);
+            }
+        }
+
+        private async Task<string> SpeechToText(string fullPath)
+        {
+            // Creates an instance of a speech config with specified subscription key and service region.
+            // Replace with your own subscription key and service region (e.g., "westus").
+            var config = SpeechConfig.FromSubscription("13beeb913c1341feb3e714b7bb21f85f ", "westeurope");
+
+            var stopRecognition = new TaskCompletionSource<int>();
+
+            // Creates a speech recognizer using file as audio input.
+            // Replace with your own audio file name.
+            using (var audioInput = AudioConfig.FromWavFileInput(fullPath))
+            {
+                string text = null;
+
+                using (var recognizer = new SpeechRecognizer(config, audioInput))
+                {
+                    // Subscribes to events.
+                    recognizer.Recognizing += (s, e) =>
+                    {
+                        Console.WriteLine($"RECOGNIZING: Text={e.Result.Text}");
+                    };
+
+                    recognizer.Recognized += (s, e) =>
+                    {
+                        if (e.Result.Reason == ResultReason.RecognizedSpeech)
+                        {
+                            Console.WriteLine($"RECOGNIZED: Text={e.Result.Text}");
+
+                            text = e.Result.Text;
+                        }
+                        else if (e.Result.Reason == ResultReason.NoMatch)
+                        {
+                            Console.WriteLine($"NOMATCH: Speech could not be recognized.");
+                        }
+                    };
+
+                    recognizer.Canceled += (s, e) =>
+                    {
+                        Console.WriteLine($"CANCELED: Reason={e.Reason}");
+
+                        if (e.Reason == CancellationReason.Error)
+                        {
+                            Console.WriteLine($"CANCELED: ErrorCode={e.ErrorCode}");
+                            Console.WriteLine($"CANCELED: ErrorDetails={e.ErrorDetails}");
+                            Console.WriteLine($"CANCELED: Did you update the subscription info?");
+                        }
+
+                        stopRecognition.TrySetResult(0);
+                    };
+
+                    recognizer.SessionStarted += (s, e) =>
+                    {
+                        Console.WriteLine("\n    Session started event.");
+                    };
+
+                    recognizer.SessionStopped += (s, e) =>
+                    {
+                        Console.WriteLine("\n    Session stopped event.");
+                        Console.WriteLine("\nStop recognition.");
+                        stopRecognition.TrySetResult(0);
+                    };
+
+                    // Starts continuous recognition. Uses StopContinuousRecognitionAsync() to stop recognition.
+                    await recognizer.StartContinuousRecognitionAsync().ConfigureAwait(false);
+
+                    // Waits for completion.
+                    // Use Task.WaitAny to keep the task rooted.
+                    Task.WaitAny(new[] { stopRecognition.Task });
+
+                    // Stops recognition.
+                    await recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false);
+
+                    return text;
+                }
             }
         }
     }
