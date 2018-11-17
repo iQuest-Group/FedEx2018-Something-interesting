@@ -8,9 +8,9 @@ import { FileUploaderService } from "./file-uploader.service";
   styleUrls: ["./file-uploader.component.css"]
 })
 export class FileUploaderComponent {
-  private message: string;
+  public message: string;
   private textFromSpeech: string;
-  private ourFile: File;
+  public ourFile: File;
   private waiting: boolean
   private score: number;
 
