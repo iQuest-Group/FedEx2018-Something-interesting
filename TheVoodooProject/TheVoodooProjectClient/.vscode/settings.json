@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/fd91e22e-75cf-4d76-8349-82d8f906e0bb/resourceGroups/TheVoodooProjectClient/providers/Microsoft.Web/sites/TheVoodooProjectClient",
+    "appService.deploySubpath": ""
+}
