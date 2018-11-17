@@ -1,0 +1,35 @@
+.paddingTopBottom {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    padding-top: 10px;
+}
+
+.main-container {
+    font-family: 'Roboto', sans-serif;
+}
+
+mwl-gauge {
+    width: 350px;
+    height: 350px;
+    display: inline-block;
+  }
+  mwl-gauge > .gauge > .dial {
+    stroke: #334455;
+    stroke-width: 10;
+  }
+  mwl-gauge > .gauge > .value {
+    stroke: orange;
+    stroke-dasharray: none;
+    stroke-width: 13;
+  }
+  mwl-gauge > .gauge > .value-text {
+    fill: orange;
+  }

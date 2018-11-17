@@ -1,8 +1,37 @@
-<h3>Upload a video file</h3>
-<input #file type="file" multiple (change)="upload(file.files)" />
-<br/>
-<div style="font-weight:bold;color:green;" *ngIf="message">
-  {{message}}
+<div class="text-center main-container">
+  <h2>The Voodoo Project</h2>
+  <button mat-raised-button (click)="openInput()">
+    Select WAV File to Upload
+  </button>
+  <input id="fileInput" #file type="file" hidden multiple (change)="fileChange($event.target.files)" />
+  <button mat-button [disabled]="!ourFile" (click)="upload()">Upload</button>
   <br/>
-  <button>Start processing</button>
+  <div *ngIf="message">
+    <span style="font-weight:bold;color:green;">  
+      {{message}}
+    </span>
+      <div class="paddingTopBottom">
+        <mat-divider></mat-divider>
+        <button mat-flat-button color="primary" (click)="transformAudioToText()">Get text from uploaded file</button>
+        <br/>
+        <span *ngIf="waiting && !textFromSpeech">
+          Waiting for server to convert speech to text...
+        </span>
+        <div *ngIf="textFromSpeech">
+          {{textFromSpeech}}
+          <mat-divider></mat-divider>
+          <button mat-flat-button color="primary" (click)="transformTextToScore()">Get sentiment score</button>
+          <div *ngIf="score">
+              <mwl-gauge
+                [max]="100"
+                [dialStartAngle]="120"
+                [dialEndAngle]="60"
+                [value]='score'
+                [animated]="true"
+                [animationDuration]="3">
+              </mwl-gauge>
+          </div>
+        </div>
+      </div>
+  </div>
 </div>

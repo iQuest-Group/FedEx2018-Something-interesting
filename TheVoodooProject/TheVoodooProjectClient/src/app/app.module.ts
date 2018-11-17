@@ -2,9 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { FileUploaderComponent } from './core/file-uploader/file-uploader.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { FileUploaderComponent } from './core/file-uploader/file-uploader.component';
+import { GaugeModule } from 'angular-gauge';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     FormsModule,
+    MatButtonModule,
+    MatDividerModule,
+    GaugeModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
